@@ -1,83 +1,133 @@
+# 🚀 Next Talent
 
-# 🌟 Next Talent
+**Plataforma centralizada para divulgar programas de formação em tecnologia.**
 
-Plataforma para **centralizar e divulgar programas de formação em tecnologia**, conectando instituições que oferecem iniciativas com estudantes interessados em ingressar no setor de TI.
-
----
-
-## 📌 Contextualização
-O setor de tecnologia enfrenta um déficit anual de mais de **100 mil profissionais** no Brasil.  
-Nosso projeto busca reduzir essa lacuna criando um **hub de programas de formação**, facilitando o acesso e aumentando a visibilidade para novos talentos.
+O **Next Talent** resolve o problema da **divulgação descentralizada** de iniciativas como bootcamps, residências e programas educacionais voltados à tecnologia. Conecta talentos em busca de oportunidades com empresas e instituições que oferecem programas de formação, de forma prática e centralizada.
 
 ---
 
-## 🚀 Objetivos
-- Reunir **programas de formação em TI** em um só lugar.
-- Permitir que estudantes criem perfis e recebam alertas de oportunidades.
-- Oferecer às instituições uma forma simples de divulgar suas iniciativas.
-- Criar uma base sólida para futuras integrações com APIs externas e automação de notificações.
+## 📌 Índice
+
+- [🎯 Objetivo](#objetivo)
+- [🧩 Funcionalidades](#funcionalidades)
+- [🛠 Tecnologias utilizadas](#tecnologias-utilizadas)
+- [📦 Como instalar e rodar o projeto](#como-instalar-e-rodar-o-projeto)
+- [🚀 Como usar](#como-usar)
+- [🤝 Contribuindo](#contribuindo)
+- [📝 Licença](#licença)
+- [👥 Autores e colaboradores](#autores-e-colaboradores)
+- [🙏 Agradecimentos](#agradecimentos)
 
 ---
+🎯
+## Objetivo
 
-## 🏗 Estrutura do Projeto
-
-src/
-📂 app
-   ├── 📂 (public)
-   │   ├── 📂 programas
-   │   │   ├── 📄 page.tsx          → lista de programas
-   │   │   └── 📄 [id]/page.tsx     → detalhes do programa
-   │   ├── 📄 instituicoes/page.tsx
-   │   ├── 📄 favoritos/page.tsx
-   │   ├── 📄 perfil/page.tsx
-   │   └── 📄 api-mock/route.ts     → mock inicial de API
-   └── 📄 layout.tsx                → Layout global
-📂 components                       → UI global (Header, Footer, etc.)
-📂 features
-   ├── 📂 programa
-   │   ├── 🧩 ProgramaCard.tsx
-   │   └── ⚙️ programaService.ts
-   └── 📂 instituicao
-       └── 🧩 InstituicaoCard.tsx
-📂 lib                              → utils e fetchers
-📂 store                            → estado global
-📂 types                            → tipos globais
-📂 mocks                            → dados mockados
+Facilitar o acesso de talentos a oportunidades de formação em tecnologia, notificando sobre editais e inscrições abertas conforme interesses do usuário, e centralizando as informações em uma única plataforma.
 
 ---
+🧩
+## Funcionalidades
 
-## 🖥️ Tecnologias Utilizadas
-- [Next.js 14 (App Router)](https://nextjs.org/docs/app)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [TailwindCSS](https://tailwindcss.com/) (estilização)
-- [Zustand](https://zustand-demo.pmnd.rs/) (estado global - opcional)
-- [Next API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) (mock inicial de API)
+- 🏢 **Cadastro de Programas:** Empresas e instituições podem registrar novas iniciativas, informando regras, público-alvo, datas e anexando o edital.
+- 👥 **Navegação por Oportunidades:** Usuários visualizam e acompanham facilmente os programas em andamento.
+- 🔔 **Alertas Inteligentes:** Usuários podem receber notificações sobre novas oportunidades alinhadas com seus interesses.
 
 ---
+🛠
+## Tecnologias Utilizadas
 
-## 📦 Como Rodar o Projeto
+- [**Next.js**](https://nextjs.org/) – Framework React para desenvolvimento web moderno.
+- [**Chakra UI**](https://chakra-ui.com/) – Biblioteca de componentes acessíveis e estilizados.
+- [**Zustand**](https://zustand-demo.pmnd.rs/) – Gerenciador de estado simples e poderoso para React.
+
+---
+📦
+## Como instalar e rodar o projeto
+
+Siga os passos abaixo para rodar o projeto localmente:
 
 ### Pré-requisitos
-- [Node.js](https://nodejs.org/) (>= 18.x)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
-### Passos
+- Node.js (v16+ recomendado)
+- npm ou yarn
+
+### Instalação
+
 ```bash
-# Clonar o repositório
-git clone https://github.com/SEU-USUARIO/next-talent.git
-
-# Entrar no diretório
+# Clone o repositório
+git clone https://github.com/seu-usuario/next-talent.git
 cd next-talent
 
-# Instalar dependências
+# Instale as dependências
 npm install
-
-# Rodar o projeto em desenvolvimento
-npm run dev
-
+# ou
+yarn install
 ```
-## 👨‍💻 Time de Desenvolvimento
+
+### Rodando o projeto
+
+```bash
+# Inicie o servidor de desenvolvimento
+npm run dev
+# ou
+yarn dev
+```
+
+O projeto estará disponível em `http://localhost:3000`.
+
+---
+🚀
+## Como usar
+
+Após iniciar o projeto localmente:
+
+### 🏢 Empresas/Instituições
+
+1. Acesse `/admin` ou a rota de administração.
+2. Preencha o formulário com as informações do programa (nome, descrição, público, datas).
+3. Faça upload do edital em PDF.
+4. Publique o programa.
+
+### 👤 Usuários
+
+1. Acesse a página inicial.
+2. Navegue pelas oportunidades ativas.
+3. Filtre por área de interesse, região ou modalidade.
+4. Salve oportunidades favoritas ou inscreva-se conforme instruções do edital.
+
+---
+🤝
+## Contribuindo
+
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+
+1. **Fork** este repositório.
+2. Crie uma branch para sua feature/correção:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça commit das suas alterações:
+   ```bash
+   git commit -m 'Adiciona nova funcionalidade'
+   ```
+4. Suba para seu fork:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um **Pull Request** com uma descrição clara do que foi feito.
+
+Você também pode abrir **Issues** para reportar bugs ou sugerir melhorias!
+
+---
+📝
+## Licença
+
+Este projeto está licenciado sob a licença **MIT**.  
+Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+👥
+## Autores e Colaboradores
 
 <table>
   <tr>
@@ -115,6 +165,18 @@ npm run dev
         <br /><sub><b>Isaac Daniel</b></sub>
       </a>
       <br />Full Stack
-    </td>
-  </tr>
+    </td>
+  </tr>
 </table>
+
+---
+
+## Agradecimentos
+🙏
+- A todos os programas de formação que inspiraram esta iniciativa.
+- À comunidade open-source que torna projetos como este possíveis.
+- Aos feedbacks construtivos durante o desenvolvimento acadêmico e profissional.
+
+---
+
+> Desenvolvido com ❤️ por pessoas que acreditam na democratização da tecnologia.
