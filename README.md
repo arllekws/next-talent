@@ -1,96 +1,182 @@
-# 📚 Plataforma de Formação em TI
+# 🚀 Next Talent
 
-<div align="center">
+**Plataforma centralizada para divulgar programas de formação em tecnologia.**
 
-![Status](https://img.shields.io/badge/status-em_desenvolvimento-yellow?style=for-the-badge)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Chakra UI](https://img.shields.io/badge/Chakra_UI-319795?style=for-the-badge&logo=chakraui&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-593D88?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-
-</div>
+O **Next Talent** resolve o problema da **divulgação descentralizada** de iniciativas como bootcamps, residências e programas educacionais voltados à tecnologia. Conecta talentos em busca de oportunidades com empresas e instituições que oferecem programas de formação, de forma prática e centralizada.
 
 ---
 
-## 📖 Descrição do Projeto
+## 📌 Índice
 
-A **Plataforma de Formação em TI** tem como objetivo **centralizar e democratizar o acesso a programas de capacitação tecnológica**, como cursos rápidos, graduações, bootcamps e iniciativas públicas ou privadas.  
-
-Atualmente, essas oportunidades estão dispersas em diversos sites e redes sociais, o que dificulta o acesso dos interessados.  
-A proposta é desenvolver uma **aplicação web moderna, acessível e responsiva**, conectando **instituições** e **estudantes** de forma eficiente e intuitiva.
-
----
-
-## 🎯 Funcionalidades Principais
-
-- 🏢 Cadastro de **empresas/instituições** com programas abertos  
-- 👨‍🎓 Cadastro de **usuários interessados** (alunos/estudantes)  
-- 📄 Upload de **editais completos** com regras, público-alvo e prazos  
-- 💡 Criação de **perfil de afinidades** personalizado  
-- 🔔 **Alertas automáticos** sobre novos programas compatíveis com o perfil  
-- 📱 **Interface moderna e responsiva**, construída com Chakra UI  
+- [🎯 Objetivo](#objetivo)
+- [🧩 Funcionalidades](#funcionalidades)
+- [🛠 Tecnologias utilizadas](#tecnologias-utilizadas)
+- [📦 Como instalar e rodar o projeto](#como-instalar-e-rodar-o-projeto)
+- [🚀 Como usar](#como-usar)
+- [🤝 Contribuindo](#contribuindo)
+- [📝 Licença](#licença)
+- [👥 Autores e colaboradores](#autores-e-colaboradores)
+- [🙏 Agradecimentos](#agradecimentos)
 
 ---
+🎯
+## Objetivo
 
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Descrição |
-|-------------|------------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="20"/> **Next.js** | Framework React para criação de aplicações web otimizadas e escaláveis |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20"/> **TypeScript** | Superset de JavaScript com tipagem estática, garantindo maior segurança e manutenção |
-| <img src="https://cdn.simpleicons.org/chakraui/319795" width="20"/> **Chakra UI** | Biblioteca de componentes acessíveis e customizáveis para interfaces modernas |
-| 🐻 **Zustand** | Biblioteca leve e performática para gerenciamento de estado global |
+Facilitar o acesso de talentos a oportunidades de formação em tecnologia, notificando sobre editais e inscrições abertas conforme interesses do usuário, e centralizando as informações em uma única plataforma.
 
 ---
+🧩
+## Funcionalidades
 
-## 🧩 Estrutura do Projeto
+- 🏢 **Cadastro de Programas:** Empresas e instituições podem registrar novas iniciativas, informando regras, público-alvo, datas e anexando o edital.
+- 👥 **Navegação por Oportunidades:** Usuários visualizam e acompanham facilmente os programas em andamento.
+- 🔔 **Alertas Inteligentes:** Usuários podem receber notificações sobre novas oportunidades alinhadas com seus interesses.
 
-```bash
+---
+🛠
+## Tecnologias Utilizadas
 
-📦 plataforma-formacao-ti
-├── 📁 public    
-├── 📁 src
-│   ├── 📁 components
-│   ├── 📁 pages
-│   ├── 📁 hooks
-│   ├── 📁 store
-│   ├── 📁 styles
-│   └── 📁 utils
-├── 📄 package.json
-├── 📄 tsconfig.json
-└── 📄 README.md
+- [**Next.js**](https://nextjs.org/) – Framework React para desenvolvimento web moderno.
+- [**Chakra UI**](https://chakra-ui.com/) – Biblioteca de componentes acessíveis e estilizados.
+- [**Zustand**](https://zustand-demo.pmnd.rs/) – Gerenciador de estado simples e poderoso para React.
 
-```
+---
+📦
+## Como instalar e rodar o projeto
 
-## 🚀 Como Executar o Projeto
+Siga os passos abaixo para rodar o projeto localmente:
 
-🔧 **Pré-requisitos**
+### Pré-requisitos
 
-Antes de começar, você precisa ter instalado em sua máquina:
+- Node.js (v16+ recomendado)
+- npm ou yarn
 
-- **Node.js** (versão 18+ recomendada)  
-- **npm** ou **yarn**
-
-🧭 **Passos para rodar localmente**
+### Instalação
 
 ```bash
 # Clone o repositório
-git clone https://github.com/lblima038/GC_RecruitME.git
+git clone https://github.com/seu-usuario/next-talent.git
+cd next-talent
 
-```
-
-```bash
-# Acesse a pasta do projeto
-cd GC_RecruitME
-```
-
-```bash
 # Instale as dependências
 npm install
+# ou
+yarn install
 ```
 
+### Rodando o projeto
+
 ```bash
-# Execute o servidor de desenvolvimento
+# Inicie o servidor de desenvolvimento
 npm run dev
+# ou
+yarn dev
 ```
+
+O projeto estará disponível em `http://localhost:3000`.
+
+---
+🚀
+## Como usar
+
+Após iniciar o projeto localmente:
+
+### 🏢 Empresas/Instituições
+
+1. Acesse `/admin` ou a rota de administração.
+2. Preencha o formulário com as informações do programa (nome, descrição, público, datas).
+3. Faça upload do edital em PDF.
+4. Publique o programa.
+
+### 👤 Usuários
+
+1. Acesse a página inicial.
+2. Navegue pelas oportunidades ativas.
+3. Filtre por área de interesse, região ou modalidade.
+4. Salve oportunidades favoritas ou inscreva-se conforme instruções do edital.
+
+---
+🤝
+## Contribuindo
+
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+
+1. **Fork** este repositório.
+2. Crie uma branch para sua feature/correção:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça commit das suas alterações:
+   ```bash
+   git commit -m 'Adiciona nova funcionalidade'
+   ```
+4. Suba para seu fork:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um **Pull Request** com uma descrição clara do que foi feito.
+
+Você também pode abrir **Issues** para reportar bugs ou sugerir melhorias!
+
+---
+📝
+## Licença
+
+Este projeto está licenciado sob a licença **MIT**.  
+Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+👥
+## Autores e Colaboradores
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/arllekws">
+        <img src="https://avatars.githubusercontent.com/arllekws" width="80px;" alt="Foto Nome1"/>
+        <br /><sub><b>Arllesson Gomes/b></sub>
+      </a>
+      <br />Frontend
+    </td>
+    <td align="center">
+      <a href="https://github.com/PriscilaMdeLima">
+        <img src="https://avatars.githubusercontent.com/PriscilaMdeLima" width="80px;" alt="Foto Nome2"/>
+        <br /><sub><b>Priscila</b></sub>
+      </a>
+      <br />Full Stack
+    </td>
+    <td align="center">
+      <a href="https://github.com/Joao-Miguel-F">
+        <img src="https://avatars.githubusercontent.com/Joao-Miguel-F" width="80px;" alt="Foto Nome3"/>
+        <br /><sub><b>João Miguel</b></sub>
+      </a>
+      <br />Full Stack
+    </td>
+    <td align="center">
+      <a href="https://github.com/tfsLua">
+        <img src="https://avatars.githubusercontent.com/tfsLua" width="80px;" alt="Foto Nome4"/>
+        <br /><sub><b>Thaissa Fernandes (Lua)</b></sub>
+      </a>
+      <br />Full Stack
+    </td>
+    <td align="center">
+      <a href="https://github.com/Isaac-Daniel-A-D">
+        <img src="https://avatars.githubusercontent.com/Isaac-Daniel-A-D" width="80px;" alt="Foto Nome4"/>
+        <br /><sub><b>Isaac Daniel</b></sub>
+      </a>
+      <br />Full Stack
+    </td>
+  </tr>
+</table>
+
+---
+
+## Agradecimentos
+🙏
+- A todos os programas de formação que inspiraram esta iniciativa.
+- À comunidade open-source que torna projetos como este possíveis.
+- Aos feedbacks construtivos durante o desenvolvimento acadêmico e profissional.
+
+---
+
+> Desenvolvido com ❤️ por pessoas que acreditam na democratização da tecnologia.
