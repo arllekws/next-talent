@@ -1,12 +1,9 @@
-// app/components/Cards/OpportunityCard.tsx
-'use client';
-
 import Link from 'next/link';
 import {
   Card,
   CardBody,
-  HStack,
   VStack,
+  HStack,
   Heading,
   Text,
   Badge,
@@ -14,8 +11,11 @@ import {
   Button,
   Box,
   useColorModeValue,
+  IconButton,
+  Tooltip,
 } from '@chakra-ui/react';
-import { FaCalendarAlt, FaUsers } from 'react-icons/fa';
+import { FaCalendarAlt, FaUsers, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { useUserDashboardStore } from '@/lib/store/useUserDashboardStore';
 
 interface Opportunity {
   id: number | string;
@@ -31,11 +31,10 @@ interface OpportunityCardProps {
   opportunity: Opportunity;
 }
 
-// Funções utilitárias de status
 const getStatusColor = (status: string) => {
-  if (status === 'closing-soon') return 'brand.300'; // Tan
-  if (status === 'open') return 'brand.500'; // Moss Green
-  return 'gray';
+  if (status === 'closing-soon') return 'orange.400';
+  if (status === 'open') return 'green.400';
+  return 'gray.400';
 };
 
 const getStatusLabel = (status: string) => {
@@ -45,49 +44,44 @@ const getStatusLabel = (status: string) => {
 };
 
 export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
+  const { toggleFavorite, isFavorite } = useUserDashboardStore();
+  const favorite = isFavorite(opportunity.id);
   const isClosed = getStatusLabel(opportunity.status) === 'Fechado';
 
-  const borderColor = useColorModeValue('brand.300', 'brand.700');
-  const hoverBorder = useColorModeValue('brand.500', 'brand.300');
-  const bgCard = useColorModeValue('brand.100', 'gray.800');
-  const textColor = useColorModeValue('brand.900', 'brand.100');
-  const subText = useColorModeValue('gray.600', 'gray.400');
+  const bgCard = useColorModeValue('white', 'gray.800');
+  const hoverBg = useColorModeValue('gray.50', 'gray.700');
+  const textColor = useColorModeValue('gray.800', 'gray.100');
+  const subText = useColorModeValue('gray.500', 'gray.400');
 
+  // --- Novo Layout ---
   const cardContent = (
     <Card
-      variant="outline"
       bg={bgCard}
-      borderColor={borderColor}
-      _hover={!isClosed ? { shadow: 'md', cursor: 'pointer', borderColor: hoverBorder } : {}}
+      borderRadius="2xl"
+      p={5}
+      _hover={{ bg: !isClosed ? hoverBg : bgCard, shadow: 'lg' }}
       transition="all 0.2s"
-      width="100%"
       opacity={isClosed ? 0.6 : 1}
+      width="100%"
     >
-      <CardBody>
-        <HStack justify="space-between" align="start" mb={3}>
-          <VStack align="start" spacing={1} flex={1}>
-            <Heading size="sm" color={textColor}>
-              {opportunity.title}
-            </Heading>
-            <HStack spacing={2} wrap="wrap">
-              <Text fontSize="sm" color={subText}>
-                {opportunity.companyName}
-              </Text>
-              <Text fontSize="sm" color="gray.500" display={{ base: 'none', md: 'block' }}>
-                •
-              </Text>
-              <Badge bg="brand.500" color="white">
-                {opportunity.type}
-              </Badge>
-            </HStack>
-          </VStack>
-          <Badge bg={getStatusColor(opportunity.status)} color="white">
-            {getStatusLabel(opportunity.status)}
-          </Badge>
-        </HStack>
+      <HStack align="start" spacing={6} justify="space-between">
+        {/* --- Coluna Principal: Texto --- */}
+        <VStack align="start" spacing={3} flex={1}>
+          {/* Título */}
+          <Heading size="md" color={textColor}>
+            {opportunity.title}
+          </Heading>
 
-        <HStack justify="space-between" mt={4}>
-          <HStack spacing={4} fontSize="sm" color={subText}>
+          {/* Empresa + Tipo */}
+          <HStack spacing={3}>
+            <Text fontSize="sm" color={subText}>
+              {opportunity.companyName}
+            </Text>
+            <Badge colorScheme="teal">{opportunity.type}</Badge>
+          </HStack>
+
+          {/* Status + Inscritos + Prazo */}
+          <HStack spacing={5} fontSize="sm" color={subText}>
             <HStack>
               <Icon as={FaCalendarAlt} />
               <Text>Até {opportunity.deadline}</Text>
@@ -96,27 +90,41 @@ export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
               <Icon as={FaUsers} />
               <Text>{opportunity.participants} inscritos</Text>
             </HStack>
+            <Badge colorScheme={getStatusColor(opportunity.status)}>
+              {getStatusLabel(opportunity.status)}
+            </Badge>
           </HStack>
+        </VStack>
+
+        {/* --- Coluna de Ações --- */}
+        <VStack spacing={2}>
+          <Tooltip label={favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
+            <IconButton
+              aria-label="Favoritar"
+              icon={favorite ? <FaHeart color="red" /> : <FaRegHeart />}
+              variant="outline"
+              colorScheme="red"
+              onClick={(e) => {
+                e.preventDefault();
+                toggleFavorite(opportunity);
+              }}
+            />
+          </Tooltip>
 
           <Button
             isDisabled={isClosed}
+            colorScheme="teal"
             size="sm"
-            colorScheme="brand"
-            bg="brand.500"
-            _hover={{ bg: 'brand.700' }}
-            variant="solid"
-            display={{ base: 'none', md: 'flex' }}
+            w="full"
           >
             Inscrever-se
           </Button>
-        </HStack>
-      </CardBody>
+        </VStack>
+      </HStack>
     </Card>
   );
 
-  if (isClosed) {
-    return <Box>{cardContent}</Box>;
-  }
+  if (isClosed) return <Box>{cardContent}</Box>;
 
   return (
     <Link href={`/programas/${opportunity.id}`} style={{ textDecoration: 'none' }}>

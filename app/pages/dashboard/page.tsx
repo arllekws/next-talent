@@ -92,7 +92,7 @@ const DashboardPage = () => {
           </VStack>
         </Box>
 
-        <Grid templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap={6}>
+        <Grid templateColumns={{ base: '1fr', lg: '4fr 1fr' }} gap={6}>
           {/* Main Content */}
           <GridItem>
             <Card bg={cardBg} borderWidth="1px" borderColor={borderColor}>
@@ -103,21 +103,27 @@ const DashboardPage = () => {
                 <HStack spacing={4}>
                   <Button size="sm" variant={activeTab === 'opportunities' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('opportunities')}>Novas Oportunidades</Button>
                   <Button size="sm" variant={activeTab === 'applications' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('applications')}>Minhas Inscrições</Button>
-                  <Button size="sm" variant={activeTab === 'saved' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('saved')}>Salvos</Button>
+                  <Button size="sm" variant={activeTab === 'saved' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('saved')}>Favorito</Button>
                 </HStack>
               </CardHeader>
               <CardBody>
                 <VStack spacing={4} align="stretch">
-                  {programsLoading && <Text>Carregando oportunidades...</Text>}
-                  
-                  {activeTab === 'opportunities' && !programsLoading && programs.map((opp) => (
-                    <OpportunityCard key={opp.id} opportunity={opp} />
-                  ))}
-                  
-                  {activeTab === 'saved' && savedPrograms.map((program) => (
-                    <Text key={program.id}>{program.title}</Text> // Exemplo
-                  ))}
-                </VStack>
+  {programsLoading && <Text>Carregando oportunidades...</Text>}
+
+  {activeTab === 'opportunities' && !programsLoading && programs.map((opp) => (
+    <OpportunityCard key={opp.id} opportunity={opp} />
+  ))}
+
+  {activeTab === 'saved' && (
+    savedPrograms.length > 0 ? (
+      savedPrograms.map((program) => (
+        <OpportunityCard key={program.id} opportunity={program} />
+      ))
+    ) : (
+      <Text color="gray.500">Nenhuma oportunidade favoritada ainda.</Text>
+    )
+  )}
+</VStack>
               </CardBody>
             </Card>
           </GridItem>

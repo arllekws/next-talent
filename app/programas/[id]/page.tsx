@@ -1,9 +1,20 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { Box, Heading, Text, Button, VStack, Spinner } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  VStack,
+  HStack,
+  Badge,
+  Spinner,
+  Container,
+  Divider,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { useProgramStore } from '@/lib/store/useProgramStore';
 
 export default function ProgramDetailPage() {
@@ -12,33 +23,61 @@ export default function ProgramDetailPage() {
 
   const program = programs.find(p => String(p.id) === String(id));
 
+  const bgCard = useColorModeValue('white', 'gray.800');
+  const textColor = useColorModeValue('gray.800', 'gray.100');
+  const subText = useColorModeValue('gray.500', 'gray.400');
+
   if (!program) {
     return (
-      <Box p={8}>
-        <Heading>Programa não encontrado</Heading>
-        <Link href="/dashboard">
-          <Button mt={4} colorScheme="teal">Voltar</Button>
-        </Link>
-      </Box>
+      <Container maxW="3xl" py={10}>
+        <Box bg={bgCard} p={8} borderRadius="2xl" boxShadow="md" textAlign="center">
+          <Heading size="lg">Programa não encontrado</Heading>
+          <Link href="/dashboard">
+            <Button mt={6} colorScheme="teal">Voltar</Button>
+          </Link>
+        </Box>
+      </Container>
     );
   }
 
   return (
-    <Box p={8}>
-      <VStack align="start" spacing={4}>
-        <Heading>{program.title}</Heading>
-        <Text color="gray.600">Oferecido por: {program.companyName}</Text>
-        <Text><strong>Tipo:</strong> {program.type}</Text>
-        <Text><strong>Prazo:</strong> {program.deadline}</Text>
-        <Text><strong>Inscritos:</strong> {program.participants}</Text>
-        <Text><strong>Descrição:</strong> {program.description || 'Sem descrição disponível.'}</Text>
+    <Container maxW="3xl" py={10}>
+      <Box bg={bgCard} p={8} borderRadius="2xl" boxShadow="lg">
+        <VStack align="start" spacing={6}>
+          {/* --- Cabeçalho --- */}
+          <Heading color={textColor}>{program.title}</Heading>
+          <HStack spacing={3}>
+            <Text color={subText}>Oferecido por: {program.companyName}</Text>
+            <Badge colorScheme="teal">{program.type}</Badge>
+          </HStack>
 
-        <Button colorScheme="teal">Inscrever-se</Button>
+          <Divider />
 
-        <Link href="/dashboard">
-          <Button variant="outline">Voltar</Button>
-        </Link>
-      </VStack>
-    </Box>
+          {/* --- Informações principais --- */}
+          <VStack align="start" spacing={2}>
+            <Text><strong>Prazo:</strong> {program.deadline}</Text>
+            <Text><strong>Inscritos:</strong> {program.participants}</Text>
+          </VStack>
+
+          <Divider />
+
+          {/* --- Descrição --- */}
+          <Box>
+            <Heading size="md" mb={2}>Descrição</Heading>
+            <Text color={subText}>{program.description || 'Sem descrição disponível.'}</Text>
+          </Box>
+
+          <Divider />
+
+          {/* --- Botões --- */}
+          <HStack spacing={4} mt={4}>
+            <Button colorScheme="teal" flex={1}>Inscrever-se</Button>
+            <Link href="/" style={{ flex: 1 }}>
+              <Button variant="outline" flex={1}>Voltar</Button>
+            </Link>
+          </HStack>
+        </VStack>
+      </Box>
+    </Container>
   );
 }
