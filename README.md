@@ -171,6 +171,23 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
+
+## ✅ Checklist de Entrega
+
+Este checklist descreve os itens implementados e testados no projeto **NextTalent**:
+
+- [ X ] **Next + Chakra + Zustand configurados**  
+- [ X ] **`/programas`**: Lista de programas com filtros funcionando (área, modalidade, nível, período de inscrição)  
+- [ X ] **`/programas/[id]`**: Página de detalhes com dados simulados  
+- [ X ] **Favoritar / Desfavoritar**: Funcionalidade funcionando e persistida via Zustand  
+- [ ] **`/instituicoes`**: Cards básicos de instituições  
+- [ X ] **`/favoritos`**: Exibição das oportunidades favoritas do usuário  
+- [ X] **`/perfil`**: Página de perfil com interesses simulados  
+- [ ] **Loading / Empty / Error states**: Estados de carregamento, vazio e erro implementados  
+- [ X ] **Deploy publicado**: Projeto disponível online com link no README  
+- [ X ] **README**: Instruções de instalação, execução e uso atualizadas
+
+
 ## Agradecimentos
 🙏
 - A todos os programas de formação que inspiraram esta iniciativa.

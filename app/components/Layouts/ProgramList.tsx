@@ -34,15 +34,15 @@ export default function ProgramList({ programs, isLoading }: ProgramListProps) {
 
   // --- Filtragem ---
   const filteredPrograms = useMemo(() => {
-    return programs.filter((p) => {
-      return (
-        (filters.area === '' || p.area === filters.area) &&
-        (filters.type === '' || p.type === filters.type) &&
-        (filters.level === '' || p.level === filters.level) &&
-        (filters.deadline === '' || p.deadline >= filters.deadline)
-      );
-    });
-  }, [filters, programs]);
+  return programs.filter((p) => {
+    return (
+      (filters.area === '' || p.area === filters.area) &&
+      (filters.type === '' || p.type === filters.type) &&
+      (filters.level === '' || p.level === filters.level) &&
+      (filters.deadline === '' || new Date(p.deadline) >= new Date(filters.deadline))
+    );
+  });
+}, [filters, programs]);
 
   const clearFilters = () =>
     setFilters({ area: '', type: '', level: '', deadline: '' });

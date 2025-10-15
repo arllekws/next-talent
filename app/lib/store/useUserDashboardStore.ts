@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import * as dashboardService from '../services/dashboardService';
 
 interface Program {
@@ -22,49 +23,58 @@ interface UserDashboardState {
   isFavorite: (id: string | number) => boolean;
 }
 
-export const useUserDashboardStore = create<UserDashboardState>((set, get) => ({
-  user: null,
-  stats: [],
-  savedPrograms: [],
-  isLoading: true,
-  error: null,
+export const useUserDashboardStore = create<UserDashboardState>()(
+  persist(
+    (set, get) => ({
+      user: null,
+      stats: [],
+      savedPrograms: [],
+      isLoading: true,
+      error: null,
 
-  fetchDashboardData: async () => {
-    set({ isLoading: true, error: null });
-    try {
-      const [userData, statsData, savedProgramsData] = await Promise.all([
-        dashboardService.fetchMockUser(),
-        dashboardService.fetchMockStats(),
-        dashboardService.fetchMockSavedPrograms(),
-      ]);
+      fetchDashboardData: async () => {
+        set({ isLoading: true, error: null });
+        try {
+          const [userData, statsData, savedProgramsData] = await Promise.all([
+            dashboardService.fetchMockUser(),
+            dashboardService.fetchMockStats(),
+            dashboardService.fetchMockSavedPrograms(),
+          ]);
 
-      set({
-        user: userData as any,
-        stats: statsData as any[],
-        savedPrograms: savedProgramsData as Program[],
-        isLoading: false,
-        error: null,
-      });
-    } catch (e) {
-      set({
-        error: 'Falha ao carregar dados do dashboard.',
-        isLoading: false,
-        stats: [],
-        savedPrograms: [],
-      });
+          set({
+            user: userData as any,
+            stats: statsData as any[],
+            savedPrograms: savedProgramsData as Program[],
+            isLoading: false,
+            error: null,
+          });
+        } catch (e) {
+          set({
+            error: 'Falha ao carregar dados do dashboard.',
+            isLoading: false,
+            stats: [],
+            savedPrograms: [],
+          });
+        }
+      },
+
+      toggleFavorite: (program) => {
+        const { savedPrograms } = get();
+        const alreadySaved = savedPrograms.some((p) => p.id === program.id);
+
+        if (alreadySaved) {
+          set({ savedPrograms: savedPrograms.filter((p) => p.id !== program.id) });
+        } else {
+          set({ savedPrograms: [...savedPrograms, program] });
+        }
+      },
+
+      isFavorite: (id) => get().savedPrograms.some((p) => p.id === id),
+    }),
+    {
+      name: 'user-dashboard', // chave no localStorage
+      storage: typeof window !== 'undefined' ? createJSONStorage(() => localStorage) : undefined, // agora usamos storage
+      partialize: (state) => ({ savedPrograms: state.savedPrograms }), // só persiste favoritos
     }
-  },
-
-  toggleFavorite: (program) => {
-    const { savedPrograms } = get();
-    const alreadySaved = savedPrograms.some((p) => p.id === program.id);
-
-    if (alreadySaved) {
-      set({ savedPrograms: savedPrograms.filter((p) => p.id !== program.id) });
-    } else {
-      set({ savedPrograms: [...savedPrograms, program] });
-    }
-  },
-
-  isFavorite: (id) => get().savedPrograms.some((p) => p.id === id),
-}));
+  )
+);
