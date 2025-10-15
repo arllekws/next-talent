@@ -2,6 +2,7 @@
 
 'use client';
 
+
 import {
   Box, Container, Grid, GridItem, Heading, Text, VStack, HStack, Button,
   Card, CardHeader, CardBody, Flex, useColorModeValue, Center, Spinner
@@ -19,6 +20,7 @@ import { useUserDashboardStore } from '@/lib/store/useUserDashboardStore';
 
 // Contexto de Autenticação
 import { useAuth } from '@/context/AuthContext'; // <-- IMPORTANTE: Adicionamos o AuthContext
+import ProgramList from '@/components/Layouts/ProgramList';
 
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState<'opportunities' | 'saved' | 'applications'>('opportunities');
@@ -102,28 +104,29 @@ const DashboardPage = () => {
                 </HStack>
                 <HStack spacing={4}>
                   <Button size="sm" variant={activeTab === 'opportunities' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('opportunities')}>Novas Oportunidades</Button>
-                  <Button size="sm" variant={activeTab === 'applications' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('applications')}>Minhas Inscrições</Button>
-                  <Button size="sm" variant={activeTab === 'saved' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('saved')}>Favorito</Button>
+                  {/* <Button size="sm" variant={activeTab === 'applications' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('applications')}>Minhas Inscrições</Button> */}
+                  <Button size="sm" variant={activeTab === 'saved' ? 'solid' : 'ghost'} colorScheme="teal" onClick={() => setActiveTab('saved')}>Favoritos</Button>
                 </HStack>
               </CardHeader>
               <CardBody>
-                <VStack spacing={4} align="stretch">
-  {programsLoading && <Text>Carregando oportunidades...</Text>}
-
-  {activeTab === 'opportunities' && !programsLoading && programs.map((opp) => (
-    <OpportunityCard key={opp.id} opportunity={opp} />
-  ))}
+                <CardBody>
+  {activeTab === 'opportunities' && (
+    <ProgramList programs={programs} isLoading={programsLoading} />
+  )}
 
   {activeTab === 'saved' && (
     savedPrograms.length > 0 ? (
-      savedPrograms.map((program) => (
-        <OpportunityCard key={program.id} opportunity={program} />
-      ))
+      <VStack spacing={4} align="stretch">
+        {savedPrograms.map((program) => (
+          <OpportunityCard key={program.id} opportunity={program} />
+        ))}
+      </VStack>
     ) : (
       <Text color="gray.500">Nenhuma oportunidade favoritada ainda.</Text>
     )
   )}
-</VStack>
+</CardBody>
+
               </CardBody>
             </Card>
           </GridItem>

@@ -54,11 +54,6 @@ export default function ProgramDetailPage() {
           <Divider />
 
           {/* --- Informações principais --- */}
-          <VStack align="start" spacing={2}>
-            <Text><strong>Prazo:</strong> {program.deadline}</Text>
-            <Text><strong>Inscritos:</strong> {program.participants}</Text>
-          </VStack>
-
           <Divider />
 
           {/* --- Descrição --- */}

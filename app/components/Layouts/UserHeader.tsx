@@ -79,24 +79,34 @@ const UserHeader = () => {
                   </Box>
                 </HStack>
               </MenuButton>
-              <MenuList bg={menuBg}>
-                <Box px={4} py={2}>
-                  <Text fontSize="sm" fontWeight="600">
-                    {user.displayName}
-                  </Text>
-                  <Text fontSize="xs" color="gray.500">
-                    {user.email}
-                  </Text>
-                </Box>
-                <MenuDivider />
-                <MenuItem icon={<FaUser />} onClick={handleEditProfile}>
-                  Meu Perfil
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem icon={<FaSignOutAlt />} onClick={handleLogout} color="red.500">
-                  Sair
-                </MenuItem>
-              </MenuList>
+              <MenuList bg={menuBg} border="none" boxShadow="xl" rounded="xl" py={2}>
+  <Box px={4} py={3} bg="gray.50" borderBottom="1px solid" borderColor="gray.200" roundedTop="xl">
+    <Text fontSize="sm" fontWeight="bold">
+      {user.displayName}
+    </Text>
+    <Text fontSize="xs" color="gray.500">
+      {user.email}
+    </Text>
+  </Box>
+
+  <MenuItem
+    icon={<FaUser />}
+    _hover={{ bg: "blue.50", color: "blue.600" }}
+    onClick={handleEditProfile}
+  >
+    Meu Perfil
+  </MenuItem>
+
+  <MenuDivider />
+
+  <MenuItem
+    icon={<FaSignOutAlt />}
+    _hover={{ bg: "red.50", color: "red.600" }}
+    onClick={handleLogout}
+  >
+    Sair
+  </MenuItem>
+</MenuList>
             </Menu>
           )}
         </HStack>

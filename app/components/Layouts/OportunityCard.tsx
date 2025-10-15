@@ -81,7 +81,7 @@ export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
           </HStack>
 
           {/* Status + Inscritos + Prazo */}
-          <HStack spacing={5} fontSize="sm" color={subText}>
+          {/* <HStack spacing={5} fontSize="sm" color={subText}>
             <HStack>
               <Icon as={FaCalendarAlt} />
               <Text>Até {opportunity.deadline}</Text>
@@ -93,7 +93,7 @@ export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
             <Badge colorScheme={getStatusColor(opportunity.status)}>
               {getStatusLabel(opportunity.status)}
             </Badge>
-          </HStack>
+          </HStack> */}
         </VStack>
 
         {/* --- Coluna de Ações --- */}
@@ -117,7 +117,7 @@ export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
             size="sm"
             w="full"
           >
-            Inscrever-se
+            Detalhes
           </Button>
         </VStack>
       </HStack>

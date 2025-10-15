@@ -1,4 +1,3 @@
-// src/lib/store/useUserDashboardStore.ts
 import { create } from 'zustand';
 import * as dashboardService from '../services/dashboardService';
 
@@ -39,7 +38,6 @@ export const useUserDashboardStore = create<UserDashboardState>((set, get) => ({
         dashboardService.fetchMockSavedPrograms(),
       ]);
 
-      // 👇 Aqui está o segredo: forçamos os tipos do que vem da service
       set({
         user: userData as any,
         stats: statsData as any[],

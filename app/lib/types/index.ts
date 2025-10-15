@@ -1,4 +1,3 @@
-// lib/types/index.ts
 export interface Program {
   id: string;
   title: string;
@@ -7,7 +6,11 @@ export interface Program {
   deadline: string;
   description: string;
   participants: number;
-  status: string,
+  status: string;
   tags: ('frontend' | 'backend' | 'dados' | 'devops')[];
   enrollmentEndDate: string;
+
+  // 🔹 Novos campos
+  area?: string;
+  level?: 'Júnior' | 'Pleno' | 'Sênior';
 }

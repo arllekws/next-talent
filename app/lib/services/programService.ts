@@ -12,6 +12,8 @@ const mockPrograms: Program[] = [
     description: 'Aprenda práticas de CI/CD, containers e automação de infraestrutura com especialistas.',
     tags: ['devops'],
     enrollmentEndDate: '10 Nov 2025',
+    area: 'DevOps',
+    level: 'Pleno',
   },
   {
     id: '2',
@@ -22,8 +24,10 @@ const mockPrograms: Program[] = [
     participants: 412,
     status: 'open',
     description: 'Formação intensiva para desenvolver aplicações completas com React e Node.js.',
-    tags: ['frontend'],
+    tags: ['frontend', 'backend'],
     enrollmentEndDate: '15 Out 2025',
+    area: 'Full Stack',
+    level: 'Sênior',
   },
   {
     id: '3',
@@ -36,6 +40,8 @@ const mockPrograms: Program[] = [
     description: 'Acompanhe profissionais experientes e trace seu plano de crescimento na área de tecnologia.',
     tags: [],
     enrollmentEndDate: '25 Dez 2025',
+    area: 'Pesquisa',
+    level: 'Júnior',
   },
   {
     id: '4',
@@ -48,6 +54,8 @@ const mockPrograms: Program[] = [
     description: 'Construa uma aplicação moderna com React e Chakra UI para resolver um problema real.',
     tags: ['frontend'],
     enrollmentEndDate: '03 Nov 2025',
+    area: 'Tecnologia',
+    level: 'Pleno',
   },
   {
     id: '5',
@@ -60,6 +68,8 @@ const mockPrograms: Program[] = [
     description: 'Aprenda Python, estatística e machine learning com especialistas do mercado.',
     tags: ['dados'],
     enrollmentEndDate: '28 Nov 2025',
+    area: 'Tecnologia',
+    level: 'Sênior',
   },
 ];
 
