@@ -8,7 +8,6 @@ export interface Program {
   participants: number;
   status: string;
   tags: ('frontend' | 'backend' | 'dados' | 'devops')[];
-  enrollmentEndDate: string;
 
   // 🔹 Novos campos
   area?: string;
