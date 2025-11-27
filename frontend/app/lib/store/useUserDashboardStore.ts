@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import * as dashboardService from '../services/dashboardService';
+import { fetchUser, fetchStats, fetchSavedProgramsList } from '../services/dashboardService';
+import { saveProgram, unsaveProgram } from '../services/api';
 
 interface Program {
   id: string | number;
@@ -18,8 +19,8 @@ interface UserDashboardState {
   savedPrograms: Program[];
   isLoading: boolean;
   error: string | null;
-  fetchDashboardData: () => Promise<void>;
-  toggleFavorite: (program: Program) => void;
+  fetchDashboardData: (token: string) => Promise<void>;
+  toggleFavorite: (program: Program, token: string) => Promise<void>;
   isFavorite: (id: string | number) => boolean;
 }
 
@@ -32,13 +33,13 @@ export const useUserDashboardStore = create<UserDashboardState>()(
       isLoading: true,
       error: null,
 
-      fetchDashboardData: async () => {
+      fetchDashboardData: async (token: string) => {
         set({ isLoading: true, error: null });
         try {
           const [userData, statsData, savedProgramsData] = await Promise.all([
-            dashboardService.fetchMockUser(),
-            dashboardService.fetchMockStats(),
-            dashboardService.fetchMockSavedPrograms(),
+            fetchUser(token),
+            fetchStats(token),
+            fetchSavedProgramsList(token),
           ]);
 
           set({
@@ -49,6 +50,7 @@ export const useUserDashboardStore = create<UserDashboardState>()(
             error: null,
           });
         } catch (e) {
+          console.error('Erro ao buscar dados do dashboard:', e);
           set({
             error: 'Falha ao carregar dados do dashboard.',
             isLoading: false,
@@ -58,14 +60,25 @@ export const useUserDashboardStore = create<UserDashboardState>()(
         }
       },
 
-      toggleFavorite: (program) => {
+      toggleFavorite: async (program, token) => {
         const { savedPrograms } = get();
         const alreadySaved = savedPrograms.some((p) => p.id === program.id);
 
-        if (alreadySaved) {
-          set({ savedPrograms: savedPrograms.filter((p) => p.id !== program.id) });
-        } else {
-          set({ savedPrograms: [...savedPrograms, program] });
+        try {
+          if (alreadySaved) {
+            // Remove do backend
+            await unsaveProgram(String(program.id), token);
+            // Atualiza o estado local
+            set({ savedPrograms: savedPrograms.filter((p) => p.id !== program.id) });
+          } else {
+            // Salva no backend
+            await saveProgram(String(program.id), token);
+            // Atualiza o estado local
+            set({ savedPrograms: [...savedPrograms, program] });
+          }
+        } catch (error) {
+          console.error('Erro ao favoritar/desfavoritar programa:', error);
+          // Em caso de erro, não atualiza o estado local
         }
       },
 

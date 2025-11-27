@@ -34,12 +34,19 @@ const DashboardPage = () => {
 
   // 3. O useEffect agora depende do 'user' para buscar os dados
   useEffect(() => {
-    // Só busca os dados se o usuário estiver logado
+    console.log('🔍 Dashboard useEffect - user:', user);
     if (user) {
+      console.log('✅ Usuário logado, buscando programas...');
       fetchPrograms();
-      fetchDashboardData();
+      
+      // Obter o token do Firebase e buscar dados do dashboard
+      user.getIdToken().then((token) => {
+        fetchDashboardData(token);
+      }).catch((error) => {
+        console.error('Erro ao obter token:', error);
+      });
     }
-  }, [user, fetchPrograms, fetchDashboardData]); // <-- 'user' é uma dependência
+  }, [user, fetchPrograms, fetchDashboardData]);
 
   // Constantes de estilo
   const bgColor = useColorModeValue('gray.50', 'gray.900');

@@ -36,9 +36,18 @@ Facilitar o acesso de talentos a oportunidades de formação em tecnologia, noti
 🛠
 ## Tecnologias Utilizadas
 
+### Frontend
 - [**Next.js**](https://nextjs.org/) – Framework React para desenvolvimento web moderno.
 - [**Chakra UI**](https://chakra-ui.com/) – Biblioteca de componentes acessíveis e estilizados.
 - [**Zustand**](https://zustand-demo.pmnd.rs/) – Gerenciador de estado simples e poderoso para React.
+- [**Firebase Auth**](https://firebase.google.com/docs/auth) – Autenticação com Google.
+
+### Backend
+- [**NestJS**](https://nestjs.com/) – Framework Node.js progressivo para construção de aplicações server-side.
+- [**PostgreSQL**](https://www.postgresql.org/) – Banco de dados relacional.
+- [**Sequelize**](https://sequelize.org/) – ORM para Node.js.
+- [**Firebase Admin SDK**](https://firebase.google.com/docs/admin/setup) – Autenticação e autorização.
+- [**Swagger**](https://swagger.io/) – Documentação da API.
 
 ---
 📦
@@ -58,22 +67,79 @@ Siga os passos abaixo para rodar o projeto localmente:
 git clone https://github.com/seu-usuario/next-talent.git
 cd next-talent
 
-# Instale as dependências
+# Instale as dependências do frontend
+cd frontend
+npm install
+# ou
+yarn install
+
+# Instale as dependências do backend
+cd ../backend
 npm install
 # ou
 yarn install
 ```
 
+### Configuração de Variáveis de Ambiente
+
+#### Frontend
+
+Crie um arquivo `.env.local` na pasta `frontend/` com as seguintes variáveis:
+
+```env
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3001/api
+
+# Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+```
+
+#### Backend
+
+Crie um arquivo `.env` na pasta `backend/` com as configurações do banco de dados e Firebase Admin SDK.
+
 ### Rodando o projeto
 
+**Importante:** Você precisa rodar o backend e o frontend simultaneamente.
+
+#### Terminal 1 - Backend:
 ```bash
-# Inicie o servidor de desenvolvimento
+cd backend
+npm run start:dev
+# ou
+yarn start:dev
+```
+
+O backend estará disponível em `http://localhost:3001` e a documentação Swagger em `http://localhost:3001/api/docs`.
+
+#### Terminal 2 - Frontend:
+```bash
+cd frontend
 npm run dev
 # ou
 yarn dev
 ```
 
-O projeto estará disponível em `http://localhost:3000`.
+O frontend estará disponível em `http://localhost:3000`.
+
+---
+
+## 🧪 Como Testar a Integração
+
+Para verificar se a integração frontend-backend está funcionando, consulte o guia completo em [TESTE_INTEGRACAO.md](./TESTE_INTEGRACAO.md).
+
+**Teste rápido:**
+1. Certifique-se de que backend e frontend estão rodando
+2. Acesse `http://localhost:3000/dashboard`
+3. Faça login com Google
+4. Verifique se os programas aparecem (devem vir do backend)
+5. Clique no ícone de coração para favoritar um programa
+6. Abra o DevTools (F12) e verifique a aba Network para ver as requisições ao backend
 
 ---
 🚀
@@ -179,13 +245,14 @@ Este checklist descreve os itens implementados e testados no projeto **NextTalen
 - [ X ] **Next + Chakra + Zustand configurados**  
 - [ X ] **`/programas`**: Lista de programas com filtros funcionando (área, modalidade, nível, período de inscrição)  
 - [ X ] **`/programas/[id]`**: Página de detalhes com dados simulados  
-- [ X ] **Favoritar / Desfavoritar**: Funcionalidade funcionando e persistida via Zustand  
+- [ X ] **Favoritar / Desfavoritar**: Funcionalidade funcionando e integrada com o backend  
 - [ ] **`/instituicoes`**: Cards básicos de instituições  
 - [ X ] **`/favoritos`**: Exibição das oportunidades favoritas do usuário  
 - [ X] **`/perfil`**: Página de perfil com interesses simulados  
 - [ ] **Loading / Empty / Error states**: Estados de carregamento, vazio e erro implementados  
 - [ X ] **Deploy publicado**: Projeto disponível online com link no README  
 - [ X ] **README**: Instruções de instalação, execução e uso atualizadas
+- [ X ] **Integração Frontend-Backend**: Frontend totalmente integrado com a API do backend
 
 
 ## Agradecimentos

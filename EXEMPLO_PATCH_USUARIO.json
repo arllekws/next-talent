@@ -1,0 +1,19 @@
+{
+  "email": "arllessonsilvaaa@gmail.com",
+  "displayName": "Arllesson Silva",
+  "photoURL": "https://example.com/sua-foto.jpg",
+  "interests": [
+    "Desenvolvimento Web",
+    "Frontend",
+    "React",
+    "Next.js",
+    "TypeScript"
+  ],
+  "preferences": [
+    "Prefere trabalhar remotamente",
+    "Gosta de projetos colaborativos",
+    "Aprende melhor com aulas práticas",
+    "Interessado em startups"
+  ]
+}
+

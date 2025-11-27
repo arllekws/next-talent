@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { FaCalendarAlt, FaUsers, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useUserDashboardStore } from '@/lib/store/useUserDashboardStore';
+import { useAuth } from '@/context/AuthContext';
 
 interface Opportunity {
   id: number | string;
@@ -44,6 +45,7 @@ const getStatusLabel = (status: string) => {
 };
 
 export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
+  const { user } = useAuth();
   const { toggleFavorite, isFavorite } = useUserDashboardStore();
   const favorite = isFavorite(opportunity.id);
   const isClosed = getStatusLabel(opportunity.status) === 'Fechado';
@@ -104,9 +106,16 @@ export const OpportunityCard = ({ opportunity }: OpportunityCardProps) => {
               icon={favorite ? <FaHeart color="red" /> : <FaRegHeart />}
               variant="outline"
               colorScheme="red"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                toggleFavorite(opportunity);
+                if (user) {
+                  try {
+                    const token = await user.getIdToken();
+                    await toggleFavorite(opportunity, token);
+                  } catch (error) {
+                    console.error('Erro ao obter token:', error);
+                  }
+                }
               }}
             />
           </Tooltip>
