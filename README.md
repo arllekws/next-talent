@@ -129,6 +129,29 @@ O frontend estará disponível em `http://localhost:3000`.
 
 ---
 
+## 🐳 Executando com Docker
+
+Para executar o projeto usando Docker, consulte o guia completo em [DOCKER.md](./DOCKER.md).
+
+**Início rápido:**
+```bash
+# Construir e iniciar todos os serviços
+docker-compose up -d
+
+# Executar migrações
+docker-compose exec backend npm run migration:run
+
+# Ver logs
+docker-compose logs -f
+```
+
+Os serviços estarão disponíveis em:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:3001
+- Swagger: http://localhost:3001/api/docs
+
+---
+
 ## 🧪 Como Testar a Integração
 
 Para verificar se a integração frontend-backend está funcionando, consulte o guia completo em [TESTE_INTEGRACAO.md](./TESTE_INTEGRACAO.md).
